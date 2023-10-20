@@ -1,7 +1,10 @@
+import { RouterProvider } from 'react-router-dom';
+import router from './router';
+
 import './assets/styles/index.scss';
 
 function App() {
-  return <h1 className="text-3xl font-bold text-[#333] underline">Hello world!</h1>;
+  return <RouterProvider router={router} fallbackElement={<p>Initial Load...</p>} />;
 }
 
 export default App;
