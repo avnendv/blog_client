@@ -1,20 +1,34 @@
 @layer base {
+  html,
+  body {
+    scroll-behavior: smooth;
+  }
+
   h1 {
     @apply text-2xl font-bold;
   }
+
   h2 {
     @apply text-xl font-bold;
   }
+
   h3 {
     @apply text-lg font-semibold;
   }
+
   h4 {
     @apply text-base font-medium;
   }
+
   h5 {
     @apply text-sm font-normal;
   }
+
   h6 {
     @apply text-xs font-light;
+  }
+
+  :focus-visible {
+    outline: none;
   }
 }
