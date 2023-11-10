@@ -1,13 +1,20 @@
+import * as StylesMUI from '@mui/material/styles';
 declare module '@mui/material/styles' {
-  interface BreakpointOverrides {
-    xs: false; // removes the `xs` breakpoint
-    sm: false;
-    md: false;
-    lg: false;
-    xl: false;
-    mobile: true; // adds the `mobile` breakpoint
-    tablet: true;
-    laptop: true;
-    desktop: true;
+  export default StylesMUI;
+
+  export interface Theme extends StylesMUI.Theme {
+    av: {
+      [key: string]: string | number;
+    };
+  }
+
+  export interface CssVarsThemeOptions extends StylesMUI.CssVarsThemeOptions {
+    av: {
+      [key: string]: string | number;
+    };
+  }
+
+  export interface PaletteOptions extends StylesMUI.PaletteOptions {
+    av: StylesMUI.PaletteColorOptions;
   }
 }

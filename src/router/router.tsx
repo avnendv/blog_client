@@ -2,7 +2,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import ClientLayout from '@/layouts/ClientLayout';
 import ProtectedLayout from '@/layouts/ProtectedLayout';
 
-import _404Page from '@/pages/ErrorPage/404Page';
+import _404Page from '@/pages/Error/404Page';
 
 const router = createBrowserRouter([
   {
@@ -12,18 +12,26 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        lazy: async () => ({ Component: (await import('@/pages/HomePage')).default }),
+        lazy: async () => ({ Component: (await import('@/pages/Home')).default }),
+      },
+      {
+        path: 'blog/:slug',
+        lazy: async () => ({ Component: (await import('@/pages/Post/SinglePost')).default }),
+      },
+      {
+        path: 'author/:slug',
+        lazy: async () => ({ Component: (await import('@/pages/Post/AuthorPost')).default }),
+      },
+      {
+        path: '/',
+        element: <ProtectedLayout />,
+        children: [],
+      },
+      {
+        path: '*',
+        element: <_404Page />,
       },
     ],
-  },
-  {
-    path: '/',
-    element: <ProtectedLayout />,
-    children: [],
-  },
-  {
-    path: '*',
-    element: <_404Page />,
   },
 ]);
 

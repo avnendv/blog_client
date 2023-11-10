@@ -1,12 +1,31 @@
-import { BreakpointOverrides, createTheme } from '@mui/material/styles';
+import { BreakpointOverrides, experimental_extendTheme as extendTheme } from '@mui/material/styles';
 
-const theme = createTheme({
-  palette: {
-    secondary: {
-      light: '#ff7961',
-      main: '#f44336',
-      dark: '#ba000d',
-      contrastText: '#000',
+const theme = extendTheme({
+  av: {
+    appBarHeight: '64px',
+  },
+  colorSchemes: {
+    light: {
+      palette: {
+        primary: {
+          main: '#E8E8EA',
+        },
+        av: {
+          main: '#fff',
+          contrastText: '#000',
+        },
+      },
+    },
+    dark: {
+      palette: {
+        primary: {
+          main: '#4B6BFB',
+        },
+        av: {
+          main: '#181A2A',
+          contrastText: '#fff',
+        },
+      },
     },
   },
   spacing: 4,
