@@ -10,13 +10,13 @@ import ScrollToTop from '@/components/Scroll/ScrollToTop';
 
 function ClientLayout() {
   return (
-    <div className="container max-w-[1218px] m-auto">
+    <div className='container max-w-[1218px] m-auto'>
       <AppBar />
-      <Box component="main" sx={{ mt: (theme) => theme.av.appBarHeight }}>
+      <Box component='main' sx={{ mt: (theme) => theme.av.appBarHeight }}>
         <Outlet />
       </Box>
       <ScrollToTop>
-        <Fab size="small" aria-label="scroll back to top" className="!bg-av-primary">
+        <Fab size='small' aria-label='scroll back to top' className='!bg-av-primary'>
           <KeyboardArrowUpIcon />
         </Fab>
       </ScrollToTop>

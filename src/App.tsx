@@ -6,6 +6,8 @@ import router from './router';
 
 import './assets/styles/index.scss';
 
+import Loader from './components/Spinner/Loader';
+
 function App() {
   const { mode } = useColorScheme();
 
@@ -15,8 +17,8 @@ function App() {
   }, [mode]);
 
   return (
-    <main className="min-h-screen text-black bg-white dark:text-white dark:bg-av-dark">
-      <RouterProvider router={router} fallbackElement={<p>Initial Load...</p>} />
+    <main className='min-h-screen text-black bg-white dark:text-white dark:bg-av-dark'>
+      <RouterProvider router={router} fallbackElement={<Loader />} />
     </main>
   );
 }

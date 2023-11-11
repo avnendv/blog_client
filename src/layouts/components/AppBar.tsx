@@ -53,8 +53,8 @@ function AppBar({ window }: Props) {
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
-      <Link to="/">
-        <h6 className="my-4 text-xl font-medium">
+      <Link to='/'>
+        <h6 className='my-4 text-xl font-medium'>
           <strong>AV</strong>Blog
         </h6>
       </Link>
@@ -78,7 +78,7 @@ function AppBar({ window }: Props) {
   return (
     <Box sx={{ display: 'flex' }}>
       <AppBarMUI
-        component="nav"
+        component='nav'
         sx={{
           color: 'inherit',
           maxWidth: 1218,
@@ -92,40 +92,40 @@ function AppBar({ window }: Props) {
       >
         <Toolbar sx={{ justifyContent: { xs: 'space-between', sm: 'unset' } }}>
           <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
+            color='inherit'
+            aria-label='open drawer'
+            edge='start'
             onClick={handleDrawerToggle}
             sx={{ mx: 2, display: { sm: 'none' } }}
           >
             <MenuIcon />
           </IconButton>
-          <Link to="/">
-            <h6 className="hidden text-xl font-medium sm:block">
+          <Link to='/'>
+            <h6 className='hidden text-xl font-medium sm:block'>
               <strong>AV</strong>Blog
             </h6>
           </Link>
-          <nav className="justify-center hidden gap-4 text-center md:gap-8 lg:gap-12 xl:gap-16 sm:flex grow">
+          <nav className='justify-center hidden gap-4 text-center md:gap-8 lg:gap-12 xl:gap-16 sm:flex grow'>
             {navItems.map((item) => (
               <Link key={item.label} to={item.to}>
                 {item.label}
               </Link>
             ))}
           </nav>
-          <div className="flex items-center gap-4">
-            <FormControl size="small" sx={{ width: '18ch' }} variant="outlined">
-              <InputLabel htmlFor="search_input">Search</InputLabel>
+          <div className='flex items-center gap-4'>
+            <FormControl size='small' sx={{ width: '18ch' }} variant='outlined'>
+              <InputLabel htmlFor='search_input'>Search</InputLabel>
               <OutlinedInput
-                id="search_input"
-                type="text"
+                id='search_input'
+                type='text'
                 endAdornment={
-                  <InputAdornment position="end">
-                    <IconButton aria-label="search button" edge="end">
+                  <InputAdornment position='end'>
+                    <IconButton aria-label='search button' edge='end'>
                       <SearchIcon />
                     </IconButton>
                   </InputAdornment>
                 }
-                label="search"
+                label='search'
               />
             </FormControl>
             <SwitchTheme />
@@ -135,7 +135,7 @@ function AppBar({ window }: Props) {
       <nav>
         <Drawer
           container={container}
-          variant="temporary"
+          variant='temporary'
           open={mobileOpen}
           onClose={handleDrawerToggle}
           ModalProps={{

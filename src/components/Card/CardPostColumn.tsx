@@ -1,27 +1,49 @@
+import dayjs from 'dayjs';
 import { Link } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
+import Tooltip from '@mui/material/Tooltip';
 
-function CardPostColumn() {
+import { textClamp, formatTimeAgo } from '@/utils';
+
+interface Props {
+  post: API.PostListResultItem;
+}
+
+function CardPostColumn({ post }: Props) {
   return (
-    <div className="flex flex-col gap-4 p-4 border rounded-xl border-av-gray dark:border-av-gray-dark">
-      <img className="rounded-md" src="https://mui.com/static/images/cards/contemplative-reptile.jpg" alt="" />
-      <ul>
-        <li className="px-2 py-1 rounded-md line-clamp-1 bg-av-primary-light text-av-primary w-fit cursor-pointer max-w-[33%]">
-          Technology
-        </li>
-      </ul>
-      <Link to="#" className="text-2xl font-semibold hover:text-av-primary line-clamp-2">
-        The Impact of Technology on the Workplace: How Technology is Changing
+    <div className='flex flex-col gap-4 p-4 border rounded-xl border-av-gray dark:border-av-gray-dark'>
+      <Link to={`blog/${post.slug}`}>
+        <img className='rounded-md max-h-[260px] w-full object-cover' src={post.thumbnail} alt={post.title} />
       </Link>
-      <div className="flex flex-wrap items-center justify-between gap-2 text-sm text-av-text-gray">
-        <div className="flex items-center gap-4">
-          <Avatar alt="Remy Sharp" src="https://mui.com/static/images/avatar/1.jpg" />
-          <span className="font-medium">Remy Sharp</span>
-        </div>
+      <ul className='flex flex-wrap gap-2'>
+        {!!post.tag.length &&
+          post.tag.map((tag) => (
+            <li
+              key={tag}
+              className='px-2 py-1 rounded-md line-clamp-1 bg-av-primary-light text-av-primary w-fit cursor-pointer max-w-[33%]'
+            >
+              {tag}
+            </li>
+          ))}
+      </ul>
+      <Link to={`blog/${post.slug}`} className='text-2xl font-semibold hover:text-av-primary line-clamp-2'>
+        {post.title}
+      </Link>
+      <div className='flex flex-wrap items-center justify-between gap-2 text-sm text-av-text-gray'>
+        <Link to={`/author/${post.author._id}`}>
+          <div className='flex items-center gap-4'>
+            <Avatar alt={post.author.fullName} src={post.author.avatar} />
+            <Tooltip title={post.author.fullName}>
+              <span className='font-medium line-clamp-1'>{textClamp(post.author.fullName)}</span>
+            </Tooltip>
+          </div>
+        </Link>
         <div>
-          <time>August 20, 2022</time>
+          <Tooltip title={dayjs(post.updatedAt).format('DD/MM/YYYY HH:mm')}>
+            <time>{formatTimeAgo(post.updatedAt)}</time>
+          </Tooltip>
           &nbsp; &#x2022;&nbsp;
-          <span>14 min read</span>
+          <span>{post.minRead} phút đọc</span>
         </div>
       </div>
     </div>

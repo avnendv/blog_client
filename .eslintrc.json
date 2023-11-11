@@ -11,7 +11,7 @@
   "ignorePatterns": ["dist", ".eslintrc.json"],
   "settings": { "react": { "version": "18.2" } },
   "parser": "@typescript-eslint/parser",
-  "plugins": ["react-refresh", "import"],
+  "plugins": ["react-refresh", "import", "@tanstack/query"],
   "rules": {
     "react-refresh/only-export-components": "warn",
     "react-hooks/rules-of-hooks": "error",
@@ -20,8 +20,21 @@
     "react/display-name": 0,
     "react/react-in-jsx-scope": 0,
 
+    // tanstack/query
+    "@tanstack/query/exhaustive-deps": "error",
+    "@tanstack/query/no-rest-destructuring": "warn",
+    "@tanstack/query/stable-query-client": "error",
+
     // prettier
-    "prettier/prettier": "error",
+    "prettier/prettier": [
+      "warn",
+      {
+        "semi": true,
+        "endOfLine": "lf",
+        "singleQuote": true,
+        "jsxSingleQuote": true
+      }
+    ],
 
     // import
     "import/first": "error",

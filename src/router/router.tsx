@@ -19,6 +19,14 @@ const router = createBrowserRouter([
         lazy: async () => ({ Component: (await import('@/pages/Post/SinglePost')).default }),
       },
       {
+        path: 'newest',
+        lazy: async () => ({ Component: (await import('@/pages/Post/PostNewest')).default }),
+      },
+      {
+        path: 'topics/:slug',
+        lazy: async () => ({ Component: (await import('@/pages/Post/PostTopic')).default }),
+      },
+      {
         path: 'author/:slug',
         lazy: async () => ({ Component: (await import('@/pages/Post/AuthorPost')).default }),
       },
