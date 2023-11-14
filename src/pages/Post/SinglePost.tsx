@@ -70,7 +70,7 @@ function SinglePost() {
                     <time>{formatTimeAgo(post.updatedAt)}</time>
                   </Tooltip>
                   &nbsp; &#x2022;&nbsp;
-                  <span>{post.minRead} phút đọc</span>
+                  <span>{post.minRead || 1} phút đọc</span>
                 </div>
               </div>
               <div className='py-12'>{parse(cleanHTML)}</div>
@@ -81,7 +81,9 @@ function SinglePost() {
                       key={tag}
                       className='px-2 py-1 rounded-md line-clamp-1 bg-av-primary-light text-av-primary w-fit cursor-pointer max-w-[33%]'
                     >
-                      #{tag}
+                      <Link to={`/tags/${tag}`} className='w-full'>
+                        #{tag}
+                      </Link>
                     </li>
                   ))}
               </ul>

@@ -18,7 +18,7 @@ export const usePostNewestQuery = ({ limit, page }: API.PostListParams) =>
     placeholderData: (previousData) => previousData,
   });
 
-export const usePostTopicsQuery = ({ limit, page, slug }: ParamsQuery) =>
+export const usePostTopicQuery = ({ limit, page, slug }: ParamsQuery) =>
   useQuery({
     queryKey: ['postTopics', { limit, page, slug }],
     queryFn: () => PostApi.listPostByTopic(slug, { limit, page }),

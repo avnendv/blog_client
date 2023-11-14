@@ -27,7 +27,7 @@ function CardPostGallery({ classProp, post }: Props) {
             <time>{formatTimeAgo(post.updatedAt)}</time>
           </Tooltip>
           &nbsp; &#x2022;&nbsp;
-          {post.minRead} phút đọc
+          {post.minRead || 1} phút đọc
         </p>
       </div>
     </div>

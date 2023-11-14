@@ -32,6 +32,9 @@ const theme = extendTheme({
   components: {
     MuiCssBaseline: {
       styleOverrides: {
+        '*, *::before, *::after': {
+          boxSizing: 'border-box',
+        },
         html: {
           '*::-webkit-scrollbar': {
             width: '5px',

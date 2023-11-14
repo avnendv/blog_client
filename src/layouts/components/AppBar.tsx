@@ -1,5 +1,6 @@
-import * as React from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import AppBarMUI from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
@@ -11,14 +12,11 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
-import InputLabel from '@mui/material/InputLabel';
-import FormControl from '@mui/material/FormControl';
-import InputAdornment from '@mui/material/InputAdornment';
-import OutlinedInput from '@mui/material/OutlinedInput';
 
-import SearchIcon from '@mui/icons-material/Search';
-
+import AccountMenu from './AccountMenu';
+import SearchBox from './SearchBox';
 import SwitchTheme from '@/components/Switcher/SwitchTheme';
+import { RootState } from '@/store/reducers';
 
 interface Props {
   window?: () => Window;
@@ -32,11 +30,11 @@ const navItems = [
   },
   {
     label: 'Chủ đề',
-    to: '/blog',
+    to: '/topic',
   },
   {
-    label: 'Tag',
-    to: '/tag',
+    label: 'Series',
+    to: '/series',
   },
   {
     label: 'Liên hệ',
@@ -45,7 +43,9 @@ const navItems = [
 ];
 
 function AppBar({ window }: Props) {
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
+
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
@@ -90,7 +90,7 @@ function AppBar({ window }: Props) {
           height: (theme) => theme.av.appBarHeight,
         }}
       >
-        <Toolbar sx={{ justifyContent: { xs: 'space-between', sm: 'unset' } }}>
+        <Toolbar sx={{ justifyContent: { xs: 'space-between', sm: 'unset' }, gap: { sm: 5, md: 8, lg: 30 } }}>
           <IconButton
             color='inherit'
             aria-label='open drawer'
@@ -105,30 +105,17 @@ function AppBar({ window }: Props) {
               <strong>AV</strong>Blog
             </h6>
           </Link>
-          <nav className='justify-center hidden gap-4 text-center md:gap-8 lg:gap-12 xl:gap-16 sm:flex grow'>
+          <nav className='justify-center hidden gap-4 text-center md:gap-4 lg:gap-8 xl:gap-16 sm:flex min-w-[40%]'>
             {navItems.map((item) => (
               <Link key={item.label} to={item.to}>
                 {item.label}
               </Link>
             ))}
           </nav>
-          <div className='flex items-center gap-4'>
-            <FormControl size='small' sx={{ width: '18ch' }} variant='outlined'>
-              <InputLabel htmlFor='search_input'>Search</InputLabel>
-              <OutlinedInput
-                id='search_input'
-                type='text'
-                endAdornment={
-                  <InputAdornment position='end'>
-                    <IconButton aria-label='search button' edge='end'>
-                      <SearchIcon />
-                    </IconButton>
-                  </InputAdornment>
-                }
-                label='search'
-              />
-            </FormControl>
+          <div className='flex items-center justify-end gap-1 sm:gap-4 grow'>
+            <SearchBox />
             <SwitchTheme />
+            {isLoggedIn ? <AccountMenu /> : <Link to={'/login'}>Đăng nhập</Link>}
           </div>
         </Toolbar>
       </AppBarMUI>

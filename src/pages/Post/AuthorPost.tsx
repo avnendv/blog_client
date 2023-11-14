@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 
 import CardAuthor from './components/CardAuthor';
-// import ListCardPostGallery from '@/components/Card/ListCardPostGallery';
+import ListCardPostGallery from '@/components/Card/ListCardPostGallery';
 import ListCardPostColumn from '@/components/Card/ListCardPostColumn';
 
 import { useQueryString } from '@/utils';
@@ -23,9 +23,9 @@ function AuthorPost() {
       ) : (
         <>
           <CardAuthor />
-          {/* <ListCardPostGallery /> */}
+          <ListCardPostGallery data={postAuthorQuery.data?.data.trending} />
           <ListCardPostColumn
-            data={postAuthorQuery.data?.data}
+            data={postAuthorQuery.data?.data.posts}
             showPagination
             pagination={postAuthorQuery.data?.pagination}
           />

@@ -18,7 +18,7 @@ declare namespace API {
     description?: string;
     content: string;
     minRead: string | number;
-    tag: TagListResultItem[];
+    tag: string[];
     topic: TopicListResultItem;
     series: PostListResultItem;
     status: number;

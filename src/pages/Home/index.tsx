@@ -16,7 +16,7 @@ function HomePage() {
       ) : (
         <>
           <ListCardPostGallery title='Bài viết nổi bật' data={postTrendingQuery.data?.data} />
-          <ListCardPostColumn title='Bài viết mới' linkAll='#' data={postNewestQuery.data?.data} />
+          <ListCardPostColumn title='Bài viết mới' linkAll='/newest' data={postNewestQuery.data?.data} />
         </>
       )}
     </>

@@ -21,7 +21,7 @@ export type Response<T = unknown> = {
 export type BaseResponse<T = unknown> = Promise<Response<T>>;
 
 interface ResourceAPI<T, L> {
-  list: (params: unknown) => Promise<L>;
+  list: (params?: unknown) => Promise<L>;
   get: (id: number | string) => BaseResponse<T>;
   store: (data: T) => BaseResponse<T>;
   update: (id: number | string, data: T) => BaseResponse<T>;

@@ -5,6 +5,11 @@ export const RESULT_FAIL = 0;
 export const RESULT_OK = 1;
 export const PER_PAGE = 10;
 
+export const AV_APP = {
+  TOKEN: 'av__token',
+  USER_INFO: 'av__user-info',
+};
+
 export const STATUS = {
   DELETED: -1,
   DISABLE: 0,

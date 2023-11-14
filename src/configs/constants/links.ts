@@ -1,4 +1,5 @@
 export const LINKS = {
+  REGISTER: '/register',
   LOGIN: '/login',
   LOGOUT: '/logout',
   USER: '/user',
@@ -8,4 +9,5 @@ export const LINKS = {
   TOPIC: '/topic',
   TOPICS: '/topics',
   AUTHOR: '/author',
+  SEARCH: '/search',
 };

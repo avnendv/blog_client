@@ -12,7 +12,7 @@ interface Props {
 function CardPostColumn({ post }: Props) {
   return (
     <div className='flex flex-col gap-4 p-4 border rounded-xl border-av-gray dark:border-av-gray-dark'>
-      <Link to={`blog/${post.slug}`}>
+      <Link to={`/blog/${post.slug}`}>
         <img className='rounded-md max-h-[260px] w-full object-cover' src={post.thumbnail} alt={post.title} />
       </Link>
       <ul className='flex flex-wrap gap-2'>
@@ -22,11 +22,13 @@ function CardPostColumn({ post }: Props) {
               key={tag}
               className='px-2 py-1 rounded-md line-clamp-1 bg-av-primary-light text-av-primary w-fit cursor-pointer max-w-[33%]'
             >
-              {tag}
+              <Link to={`/tags/${tag}`} className='w-full'>
+                {tag}
+              </Link>
             </li>
           ))}
       </ul>
-      <Link to={`blog/${post.slug}`} className='text-2xl font-semibold hover:text-av-primary line-clamp-2'>
+      <Link to={`/blog/${post.slug}`} className='text-2xl font-semibold hover:text-av-primary line-clamp-2'>
         {post.title}
       </Link>
       <div className='flex flex-wrap items-center justify-between gap-2 text-sm text-av-text-gray'>
@@ -43,7 +45,7 @@ function CardPostColumn({ post }: Props) {
             <time>{formatTimeAgo(post.updatedAt)}</time>
           </Tooltip>
           &nbsp; &#x2022;&nbsp;
-          <span>{post.minRead} phút đọc</span>
+          <span>{post.minRead || 1} phút đọc</span>
         </div>
       </div>
     </div>

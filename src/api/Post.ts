@@ -12,15 +12,24 @@ const PostApi = {
     const URL = `${LINKS.POST}/newest`;
     return BaseApi.get(URL, { params });
   },
-  listPostByTag(slug: string, params?: API.PostListParams): BaseResponse<API.PostListResultItem[]> {
+  listPostByTag(
+    slug: string,
+    params?: API.PostListParams
+  ): BaseResponse<{ posts: API.PostListResultItem[]; tag: API.TagListResultItem }> {
     const URL = `${LINKS.TAGS}/${slug}`;
     return BaseApi.get(URL, { params });
   },
-  listPostByTopic(slug: string, params?: API.PostListParams): BaseResponse<API.PostListResultItem[]> {
+  listPostByTopic(
+    slug: string,
+    params?: API.PostListParams
+  ): BaseResponse<{ posts: API.PostListResultItem[]; topic: API.TopicListResultItem }> {
     const URL = `${LINKS.TOPICS}/${slug}`;
     return BaseApi.get(URL, { params });
   },
-  listPostByAuthor(slug: string, params?: API.PostListParams): BaseResponse<API.PostListResultItem[]> {
+  listPostByAuthor(
+    slug: string,
+    params?: API.PostListParams
+  ): BaseResponse<{ trending: API.PostListResultItem[]; posts: API.PostListResultItem[] }> {
     const URL = `${LINKS.AUTHOR}/${slug}`;
     return BaseApi.get(URL, { params });
   },
