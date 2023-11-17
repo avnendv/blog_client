@@ -10,4 +10,5 @@ export const LINKS = {
   TOPICS: '/topics',
   AUTHOR: '/author',
   SEARCH: '/search',
+  ACCOUNT: '/account',
 };

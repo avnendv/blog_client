@@ -15,8 +15,11 @@ const AuthApi = {
   // changePassword(data) {
   //   return BaseApi.post(LINKS.CHANGE_PASSWORD, data);
   // },
-  info(): BaseResponse<API.UserInfo> {
+  check(): BaseResponse<API.UserInfo> {
     return BaseApi.get('/check');
+  },
+  profile(): BaseResponse<API.UserInfo> {
+    return BaseApi.get('/profile');
   },
 };
 

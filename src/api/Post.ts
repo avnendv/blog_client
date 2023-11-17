@@ -33,6 +33,18 @@ const PostApi = {
     const URL = `${LINKS.AUTHOR}/${slug}`;
     return BaseApi.get(URL, { params });
   },
+  info(id: string): BaseResponse<API.PostInfo> {
+    const URL = `${LINKS.POST}/${id}/info`;
+    return BaseApi.get(URL);
+  },
+  mark(id: string, data: { mark: boolean }): BaseResponse<unknown> {
+    const URL = `${LINKS.POST}/${id}/mark`;
+    return BaseApi.patch(URL, data);
+  },
+  vote(id: string, data: { vote: number }): BaseResponse<unknown> {
+    const URL = `${LINKS.POST}/${id}/vote`;
+    return BaseApi.patch(URL, data);
+  },
 };
 
 export default PostApi;

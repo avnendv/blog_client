@@ -6,7 +6,7 @@ declare namespace API {
   };
 
   type TopicListResultItem = {
-    _id: number;
+    _id: string;
     title: string;
     slug: string;
     thumbnail?: string;

@@ -1,4 +1,7 @@
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
+import dayjs from 'dayjs';
 import DOMPurify from 'dompurify';
 import parse from 'html-react-parser';
 import IconButton from '@mui/material/IconButton';
@@ -11,21 +14,53 @@ import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlin
 import MoreHorizOutlinedIcon from '@mui/icons-material/MoreHorizOutlined';
 import HomeIcon from '@mui/icons-material/Home';
 
-import dayjs from 'dayjs';
+import classNames from 'classnames';
 import { usePostDetailQuery } from '@/queries/Post';
 import { formatTimeAgo } from '@/utils';
 
 import Spinner from '@/components/Spinner/Spinner';
+import { RootState } from '@/store/reducers';
+import PostApi from '@/api/Post';
+import { useUpdateEffect } from '@/hooks';
 
 function SinglePost() {
   const { slug } = useParams();
   const postDetailQuery = usePostDetailQuery({ slug });
+  const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
+  const [isLoadingInfo, setIsLoadingInfo] = useState(true);
+  const [isLoadingMark, setIsLoadingMark] = useState(false);
+  const [postInfo, setPostInfo] = useState<API.PostInfo>();
 
   const post = postDetailQuery.data?.data;
 
   const cleanHTML = DOMPurify.sanitize(post?.content || '', {
     USE_PROFILES: { html: true },
   });
+
+  const handleClickBookmark = () => {
+    if (isLoadingInfo) return;
+    setIsLoadingMark(true);
+    if (!isLoadingMark) {
+      PostApi.mark(postDetailQuery.data!.data._id!, { mark: !postInfo?.mark }).then((res) => {
+        if (res.result === 1) {
+          if (!postInfo) setPostInfo({ mark: true } as API.PostInfo);
+          else setPostInfo({ ...postInfo, mark: !postInfo?.mark });
+        }
+        setIsLoadingMark(false);
+      });
+    }
+  };
+
+  useUpdateEffect(() => {
+    if (isLoggedIn && postDetailQuery.data) {
+      postDetailQuery.data?.data._id &&
+        PostApi.info(postDetailQuery.data?.data._id).then((res) => {
+          setPostInfo(res.data);
+          setIsLoadingInfo(false);
+        });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoggedIn, postDetailQuery.data]);
 
   return (
     <>
@@ -51,8 +86,8 @@ function SinglePost() {
               <div className='flex justify-between gap-2 mt-4'>
                 <h1 className='mt-2 text-3xl'>{post.title}</h1>
                 <div className='min-w-[80px]'>
-                  <IconButton aria-label='bookmark'>
-                    <BookmarkBorderOutlinedIcon />
+                  <IconButton aria-label='bookmark' onClick={handleClickBookmark}>
+                    <BookmarkBorderOutlinedIcon className={classNames({ 'text-av-primary': postInfo?.mark })} />
                   </IconButton>
                   <IconButton aria-label='more action'>
                     <MoreHorizOutlinedIcon />
@@ -72,6 +107,14 @@ function SinglePost() {
                   &nbsp; &#x2022;&nbsp;
                   <span>{post.minRead || 1} phút đọc</span>
                 </div>
+              </div>
+              <div className='pt-4'>
+                <code className='text-sm italic'>{post.description}</code>
+                {/* <img
+                  className='object-contain w-full max-h-screen mt-4 rounded-lg'
+                  src={post.thumbnail}
+                  alt={post.title}
+                /> */}
               </div>
               <div className='py-12'>{parse(cleanHTML)}</div>
               <ul className='flex flex-wrap gap-2'>

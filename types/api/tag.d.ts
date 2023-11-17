@@ -6,7 +6,7 @@ declare namespace API {
   };
 
   type TagListResultItem = {
-    id: number;
+    _id: string;
     name: string;
     description?: string;
     isShowTop?: boolean;

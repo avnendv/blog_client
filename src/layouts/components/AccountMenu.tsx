@@ -8,9 +8,11 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import Tooltip from '@mui/material/Tooltip';
 import Divider from '@mui/material/Divider';
 
+import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 
+import { Link } from 'react-router-dom';
 import { logout } from '@/store/reducers/auth';
 import { RootState } from '@/store/reducers';
 
@@ -80,8 +82,22 @@ function AccountMenu() {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
+        <MenuItem sx={{ pointerEvents: 'none' }}>
+          <div className='flex items-center gap-2'>
+            <Avatar sx={{ width: 32, height: 32 }} src={user?.avatar}>
+              {user?.fullName}
+            </Avatar>
+            <div>
+              <p>{user?.fullName}</p>
+              <p className='text-sm italic text-av-gray max-w-[150px] line-clamp-1'>@{user?.userName}</p>
+            </div>
+          </div>
+        </MenuItem>
         <MenuItem onClick={handleClose}>
-          <Avatar /> Profile
+          <Link to='/account/bookmark/post'>
+            <BookmarkBorderOutlinedIcon />
+            Bài viết đã lưu
+          </Link>
         </MenuItem>
         <Divider />
         <MenuItem onClick={handleClose}>

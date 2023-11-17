@@ -6,7 +6,7 @@ declare namespace API {
   };
 
   type PostListResultItem = {
-    _id: number;
+    _id: string;
     title: string;
     slug: string;
     isShowTop: boolean;
@@ -24,6 +24,15 @@ declare namespace API {
     status: number;
     updatedAt: string;
     tag: string[];
+  };
+
+  type PostInfo = {
+    mark: boolean;
+    post: string;
+    user: string;
+    voteType: number;
+    __v: number;
+    _id: string;
   };
 
   type PostListResult = ListResult<PostListResultItem>;
