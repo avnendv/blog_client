@@ -4,7 +4,6 @@ import IconButton from '@mui/material/IconButton';
 import Avatar from '@mui/material/Avatar';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
 import Tooltip from '@mui/material/Tooltip';
 import Divider from '@mui/material/Divider';
 
@@ -94,23 +93,23 @@ function AccountMenu() {
           </div>
         </MenuItem>
         <MenuItem onClick={handleClose}>
-          <Link to='/account/bookmark/post'>
+          <Link className='flex items-center gap-2' to='/account/bookmark/post'>
             <BookmarkBorderOutlinedIcon />
             Bài viết đã lưu
           </Link>
         </MenuItem>
         <Divider />
         <MenuItem onClick={handleClose}>
-          <ListItemIcon>
+          <Link className='flex items-center gap-2' to='/account/setting'>
             <Settings fontSize='small' />
-          </ListItemIcon>
-          Settings
+            Cài đặt
+          </Link>
         </MenuItem>
         <MenuItem onClick={() => dispatch(logout())}>
-          <ListItemIcon>
+          <div className='flex items-center gap-2'>
             <Logout fontSize='small' />
-          </ListItemIcon>
-          Đăng xuất
+            Đăng xuất
+          </div>
         </MenuItem>
       </Menu>
     </>

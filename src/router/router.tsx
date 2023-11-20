@@ -6,8 +6,7 @@ import AuthLayout from '@/layouts/AuthLayout';
 
 import _404Page from '@/pages/Error/404Page';
 import { getToken } from '@/utils/cookie';
-import AuthApi from '@/api/Auth';
-import { RESULT_FAIL } from '@/configs/constants';
+import AccountLayout from '@/layouts/AccountLayout';
 
 const router = createBrowserRouter([
   {
@@ -46,21 +45,26 @@ const router = createBrowserRouter([
       {
         path: '/account',
         element: <ProtectedLayout />,
-        loader: async () => {
-          try {
-            if (getToken()) {
-              const check = await AuthApi.check();
-              if (check.result === RESULT_FAIL && !check.data) return redirect('/login');
-              return null;
-            }
-            return redirect('/login');
-            // eslint-disable-next-line no-empty
-          } catch (error) {}
-        },
         children: [
           {
             path: 'bookmark/post',
             lazy: async () => ({ Component: (await import('@/pages/Account/BookmarkPost')).default }),
+          },
+          {
+            path: 'setting',
+            element: <AccountLayout />,
+            children: [
+              {
+                index: true,
+                lazy: async () => ({ Component: (await import('@/pages/Account/Setting/SettingPersonal')).default }),
+              },
+              {
+                path: 'notifications',
+                lazy: async () => ({
+                  Component: (await import('@/pages/Account/Setting/SettingNotifications')).default,
+                }),
+              },
+            ],
           },
         ],
       },

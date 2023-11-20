@@ -90,29 +90,29 @@ function AppBar({ window }: Props) {
           height: (theme) => theme.av.appBarHeight,
         }}
       >
-        <Toolbar sx={{ justifyContent: { xs: 'space-between', sm: 'unset' }, gap: { sm: 5, md: 8, lg: 30 } }}>
+        <Toolbar sx={{ justifyContent: { xs: 'space-between', sm: 'unset' }, gap: { sm: 5, md: 2, lg: 30 } }}>
           <IconButton
             color='inherit'
             aria-label='open drawer'
             edge='start'
             onClick={handleDrawerToggle}
-            sx={{ mx: 2, display: { sm: 'none' } }}
+            sx={{ mx: 2, display: { md: 'none' } }}
           >
             <MenuIcon />
           </IconButton>
           <Link to='/'>
-            <h6 className='hidden text-xl font-medium sm:block'>
+            <h6 className='hidden text-xl font-medium md:block'>
               <strong>AV</strong>Blog
             </h6>
           </Link>
-          <nav className='justify-center hidden gap-4 text-center md:gap-4 lg:gap-8 xl:gap-16 sm:flex min-w-[40%]'>
+          <nav className='justify-center hidden gap-4 text-center md:gap-4 lg:gap-8 xl:gap-16 md:flex min-w-[40%]'>
             {navItems.map((item) => (
               <Link key={item.label} to={item.to}>
                 {item.label}
               </Link>
             ))}
           </nav>
-          <div className='flex items-center justify-end gap-1 sm:gap-4 grow'>
+          <div className='flex items-center justify-end gap-1 md:gap-1 lg:gap-4 grow'>
             <SearchBox />
             <SwitchTheme />
             {isLoggedIn ? <AccountMenu /> : <Link to={'/login'}>Đăng nhập</Link>}
@@ -129,7 +129,7 @@ function AppBar({ window }: Props) {
             keepMounted: true, // Better open performance on mobile.
           }}
           sx={{
-            display: { xs: 'block', sm: 'none' },
+            display: { xs: 'block', md: 'none' },
             '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
           }}
         >
