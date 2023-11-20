@@ -22,7 +22,7 @@ function AuthorPost() {
         <Spinner />
       ) : (
         <>
-          <CardAuthor />
+          <CardAuthor author={postAuthorQuery.data?.data.author} />
           <ListCardPostGallery data={postAuthorQuery.data?.data.trending} />
           <ListCardPostColumn
             data={postAuthorQuery.data?.data.posts}

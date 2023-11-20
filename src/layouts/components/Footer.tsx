@@ -71,7 +71,7 @@ function Footer() {
       <hr className='w-4/5 p-1 m-auto' />
       <p className='text-center'>
         Copyright &copy; 2023 |{' '}
-        <Link to='/' className='text-av-primary'>
+        <Link to='https://avnendv.id.vn' target='_blank' className='text-av-primary'>
           AVNENDV
         </Link>
       </p>

@@ -5,14 +5,18 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 
-function CardAuthor() {
+interface Props {
+  author?: API.Author;
+}
+
+function CardAuthor({ author }: Props) {
   return (
     <div className='p-12 bg-av-gray dark:bg-av-gray-dark rounded-xl'>
       <div className='max-w-[668px] flex flex-col items-center justify-center gap-4 m-auto'>
         <div className='flex items-center gap-4'>
-          <Avatar sx={{ width: 64, height: 64 }} alt='Remy Sharp' src='https://mui.com/static/images/avatar/1.jpg' />
+          <Avatar sx={{ width: 64, height: 64 }} alt={author?.fullName} src={author?.avatar} />
           <div>
-            <h3>Jonathan Doe</h3>
+            <h3>{author?.fullName}</h3>
             <p className='text-av-text-gray'>Collaborator & Editor</p>
           </div>
         </div>

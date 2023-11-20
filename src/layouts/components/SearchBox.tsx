@@ -27,7 +27,7 @@ function SearchBox() {
     setValue(event.target.value);
   };
 
-  const handleFocus = () => {
+  const openSearch = () => {
     setIsShowSearch(true);
   };
 
@@ -49,7 +49,7 @@ function SearchBox() {
             id='search_input'
             type='text'
             value={value}
-            onFocus={handleFocus}
+            onFocus={openSearch}
             onChange={handleChange}
             endAdornment={
               <InputAdornment position='end' className={value ? '' : '!hidden'}>
@@ -81,6 +81,7 @@ function SearchBox() {
                 <Divider sx={{ my: 1 }} />
                 {searchListQuery.data.data.authors.map((author) => (
                   <Link
+                    onClick={() => setIsShowSearch(false)}
                     to={`/author/${author._id}`}
                     key={author._id}
                     className='flex items-center gap-2 mb-2 text-sm hover:text-av-primary'
@@ -101,6 +102,7 @@ function SearchBox() {
                 <Divider sx={{ my: 1 }} />
                 {searchListQuery.data.data.tags.map((tag) => (
                   <Link
+                    onClick={() => setIsShowSearch(false)}
                     to={`/tags/${tag.name}`}
                     key={tag.name}
                     className='flex items-center justify-between mb-2 hover:text-av-primary'
@@ -118,6 +120,7 @@ function SearchBox() {
                 <Divider sx={{ my: 1 }} />
                 {searchListQuery.data.data.topics.map((topic) => (
                   <Link
+                    onClick={() => setIsShowSearch(false)}
                     to={`/topics/${topic.slug}`}
                     key={topic.slug}
                     className='flex items-center gap-2 mb-2 text-sm hover:text-av-primary'
@@ -138,6 +141,7 @@ function SearchBox() {
                 <Divider sx={{ my: 1 }} />
                 {searchListQuery.data.data.posts.map((post) => (
                   <Link
+                    onClick={() => setIsShowSearch(false)}
                     to={`/blog/${post.slug}`}
                     key={post.slug}
                     className='flex items-center gap-2 mb-2 text-sm hover:text-av-primary'

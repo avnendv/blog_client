@@ -29,7 +29,7 @@ const PostApi = {
   listPostByAuthor(
     slug: string,
     params?: API.PostListParams
-  ): BaseResponse<{ trending: API.PostListResultItem[]; posts: API.PostListResultItem[] }> {
+  ): BaseResponse<{ trending: API.PostListResultItem[]; posts: API.PostListResultItem[]; author: API.Author }> {
     const URL = `${LINKS.AUTHOR}/${slug}`;
     return BaseApi.get(URL, { params });
   },
