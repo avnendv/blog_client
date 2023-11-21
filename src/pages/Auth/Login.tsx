@@ -1,18 +1,10 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
 import classNames from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
+import { schema } from './schemaLogin';
 import { RootState } from '@/store/reducers';
 import { login } from '@/store/reducers/auth';
-
-const schema = yup
-  .object()
-  .shape({
-    userName: yup.string().required('Tên đăng nhập là bắt buộc'),
-    password: yup.string().required('Mật khẩu là bắt buộc'),
-  })
-  .required();
 
 function Login() {
   const {
