@@ -40,8 +40,8 @@ function SinglePost() {
   const handleClickBookmark = () => {
     if (isLoadingInfo) return;
     setIsLoadingMark(true);
-    if (!isLoadingMark) {
-      PostApi.mark(postDetailQuery.data!.data._id!, { mark: !postInfo?.mark }).then((res) => {
+    if (!isLoadingMark && postDetailQuery.data?.data) {
+      PostApi.mark(postDetailQuery.data.data._id!, { mark: !postInfo?.mark }).then((res) => {
         if (res.result === 1) {
           if (!postInfo) setPostInfo({ mark: true } as API.PostInfo);
           else setPostInfo({ ...postInfo, mark: !postInfo?.mark });
@@ -52,14 +52,13 @@ function SinglePost() {
   };
 
   useUpdateEffect(() => {
-    if (isLoggedIn && postDetailQuery.data) {
+    if (isLoggedIn && postDetailQuery.data?.data) {
       postDetailQuery.data?.data._id &&
         PostApi.info(postDetailQuery.data?.data._id).then((res) => {
           setPostInfo(res.data);
           setIsLoadingInfo(false);
         });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoggedIn, postDetailQuery.data]);
 
   return (
