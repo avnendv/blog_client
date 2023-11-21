@@ -59,6 +59,10 @@ const router = createBrowserRouter([
                 lazy: async () => ({ Component: (await import('@/pages/Account/Setting/SettingPersonal')).default }),
               },
               {
+                path: 'socials',
+                lazy: async () => ({ Component: (await import('@/pages/Account/Setting/SettingSocial')).default }),
+              },
+              {
                 path: 'notifications',
                 lazy: async () => ({
                   Component: (await import('@/pages/Account/Setting/SettingNotifications')).default,

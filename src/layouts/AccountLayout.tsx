@@ -1,14 +1,20 @@
 import { NavLink, Outlet } from 'react-router-dom';
+import classNames from 'classnames';
 
 import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
 import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
-import classNames from 'classnames';
+import PublicOutlinedIcon from '@mui/icons-material/PublicOutlined';
 
 const menu = [
   {
     to: '/account/setting',
     icon: <PersonOutlinedIcon />,
     text: 'Cài đặt tài khoản',
+  },
+  {
+    to: '/account/setting/socials',
+    icon: <PublicOutlinedIcon />,
+    text: 'Mạng xã hội',
   },
   {
     to: '/account/setting/notifications',

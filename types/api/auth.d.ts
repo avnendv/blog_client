@@ -25,5 +25,16 @@ declare namespace API {
     roles: string[];
     permissions: string[];
     avatar: string;
+    bio: string;
+  };
+
+  type UserSocial = {
+    url: string;
+    googleUrl: string;
+    facebookUrl: string;
+    githubUrl: string;
+    socialOther1: string;
+    socialOther2: string;
+    socialOther3: string;
   };
 }
