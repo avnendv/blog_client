@@ -1,7 +1,6 @@
 import { UseQueryResult } from '@tanstack/react-query';
 import DesignServicesIcon from '@mui/icons-material/DesignServices';
 
-import classNames from 'classnames';
 import ListCardPostColumn from '@/components/Card/ListCardPostColumn';
 import Spinner from '@/components/Spinner/Spinner';
 
@@ -25,12 +24,14 @@ function ListPostWrapper({ title, postQuery, isTag }: Props) {
       ) : posts && posts.length ? (
         <>
           <div
-            className={classNames(
-              'p-12 text-white rounded-lg bg-av-text-gray',
+            className='p-12 text-white bg-no-repeat bg-cover rounded-lg bg-av-text-gray'
+            style={
               !isTag && postQuery.data?.data.topic?.thumbnail
-                ? `bg-[url('${postQuery.data?.data.topic?.thumbnail}')]`
-                : ''
-            )}
+                ? {
+                    backgroundImage: `url(${postQuery.data?.data.topic?.thumbnail})`,
+                  }
+                : {}
+            }
           >
             <div className='max-w-[668px] flex flex-col items-center justify-center gap-4 m-auto'>
               <h2 className='text-3xl'>{title}</h2>
