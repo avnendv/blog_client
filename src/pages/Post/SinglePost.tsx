@@ -1,9 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import dayjs from 'dayjs';
 import DOMPurify from 'dompurify';
-import parse from 'html-react-parser';
 import IconButton from '@mui/material/IconButton';
 import Avatar from '@mui/material/Avatar';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
@@ -15,27 +14,28 @@ import MoreHorizOutlinedIcon from '@mui/icons-material/MoreHorizOutlined';
 import HomeIcon from '@mui/icons-material/Home';
 
 import classNames from 'classnames';
-import { usePostDetailQuery } from '@/queries/Post';
+import { usePostDetailQuery, usePostSeriesQuery } from '@/queries/Post';
 import { formatTimeAgo } from '@/utils';
 
 import Spinner from '@/components/Spinner/Spinner';
 import { RootState } from '@/store/reducers';
 import PostApi from '@/api/Post';
 import { useUpdateEffect } from '@/hooks';
+import WangEditorPreview from '@/components/Editor/WangEditorPreview';
 
 function SinglePost() {
   const { slug } = useParams();
   const postDetailQuery = usePostDetailQuery({ slug });
+  const postSeriesQuery = usePostSeriesQuery({
+    id: postDetailQuery.data?.data?._id,
+    postType: postDetailQuery.data?.data?.postType,
+  });
   const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
   const [isLoadingInfo, setIsLoadingInfo] = useState(true);
   const [isLoadingMark, setIsLoadingMark] = useState(false);
   const [postInfo, setPostInfo] = useState<API.PostInfo>();
-
-  const post = postDetailQuery.data?.data;
-
-  const cleanHTML = DOMPurify.sanitize(post?.content || '', {
-    USE_PROFILES: { html: true },
-  });
+  const [cleanHTML, setCleanHTML] = useState('');
+  const [post, setPost] = useState<API.PostListResultItem>();
 
   const handleClickBookmark = () => {
     if (isLoadingInfo) return;
@@ -60,6 +60,17 @@ function SinglePost() {
         });
     }
   }, [isLoggedIn, postDetailQuery.data]);
+
+  useEffect(() => {
+    if (!postDetailQuery.data?.data) return;
+
+    setPost(postDetailQuery.data?.data);
+
+    const sanitize = DOMPurify.sanitize(postDetailQuery.data?.data?.content || '', {
+      USE_PROFILES: { html: true },
+    });
+    setCleanHTML(sanitize);
+  }, [postDetailQuery.data?.data]);
 
   return (
     <>
@@ -115,7 +126,23 @@ function SinglePost() {
                   alt={post.title}
                 /> */}
               </div>
-              <div className='py-12'>{parse(cleanHTML)}</div>
+              <div className='py-12'>
+                <WangEditorPreview html={cleanHTML} />
+              </div>
+
+              {Boolean(postSeriesQuery.data?.data && postSeriesQuery.data?.data.length) && (
+                <div className='pb-12'>
+                  <h3 className='pb-4'>Danh sách bài viết:</h3>
+                  <ul className='flex flex-wrap gap-2'>
+                    {postSeriesQuery.data?.data.map((postSeries) => (
+                      <li key={postSeries.slug} className='text-av-primary'>
+                        - <Link to={`/blog/${postSeries.slug}`}>{postSeries.title}</Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
               <ul className='flex flex-wrap gap-2'>
                 {!!post.tag.length &&
                   post.tag.map((tag) => (

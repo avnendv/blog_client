@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import PostApi from '@/api/Post';
+import { POST_TYPE } from '@/configs/constants';
 
 interface ParamsQuery extends API.PostListParams {
   slug: string;
@@ -44,4 +45,18 @@ export const usePostDetailQuery = ({ slug }: { slug?: string }) =>
     queryKey: ['postDetail', slug],
     queryFn: () => PostApi.get(slug!),
     enabled: slug !== undefined,
+  });
+
+export const useSeriesQuery = ({ limit, page }: API.PostListParams) =>
+  useQuery({
+    queryKey: ['series', { limit, page }],
+    queryFn: () => PostApi.series({ limit, page }),
+    placeholderData: (previousData) => previousData,
+  });
+
+export const usePostSeriesQuery = ({ postType, id }: { postType?: number; id?: string }) =>
+  useQuery({
+    queryKey: ['postSeries', { postType, id }],
+    queryFn: () => PostApi.postSeries(id!),
+    enabled: Boolean(postType && +postType === POST_TYPE.SERIES),
   });

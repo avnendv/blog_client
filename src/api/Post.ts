@@ -45,6 +45,14 @@ const PostApi = {
     const URL = `${LINKS.POST}/${id}/vote`;
     return BaseApi.patch(URL, data);
   },
+  series(params?: API.PostListParams): BaseResponse<API.PostListResultItem[]> {
+    const URL = `${LINKS.POST}/series`;
+    return BaseApi.get(URL, { params });
+  },
+  postSeries(id: string): BaseResponse<API.PostListResultItem[]> {
+    const URL = `${LINKS.POST}/series/${id}`;
+    return BaseApi.get(URL);
+  },
 };
 
 export default PostApi;

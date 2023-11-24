@@ -10,6 +10,7 @@ import Divider from '@mui/material/Divider';
 import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
+import PostAddIcon from '@mui/icons-material/PostAdd';
 
 import { Link } from 'react-router-dom';
 import { logout } from '@/store/reducers/auth';
@@ -91,6 +92,12 @@ function AccountMenu() {
               <p className='text-sm italic text-av-gray max-w-[150px] line-clamp-1'>@{user?.userName}</p>
             </div>
           </div>
+        </MenuItem>
+        <MenuItem onClick={handleClose}>
+          <Link className='flex items-center gap-2' to='/account/new-post'>
+            <PostAddIcon />
+            Bài viết mới
+          </Link>
         </MenuItem>
         <MenuItem onClick={handleClose}>
           <Link className='flex items-center gap-2' to='/account/bookmark/post'>
