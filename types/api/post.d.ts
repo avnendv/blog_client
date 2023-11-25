@@ -5,6 +5,18 @@ declare namespace API {
     page?: string | number;
   };
 
+  type PostForm = {
+    title: string;
+    slug: string;
+    thumbnail: string;
+    topic: string;
+    tag: string;
+    postType: string;
+    series?: string;
+    description: string;
+    content?: string;
+  };
+
   type PostListResultItem = {
     _id: string;
     title: string;

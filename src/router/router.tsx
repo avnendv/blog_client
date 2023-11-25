@@ -55,6 +55,10 @@ const router = createBrowserRouter([
             lazy: async () => ({ Component: (await import('@/pages/Account/BookmarkPost')).default }),
           },
           {
+            path: 'post',
+            lazy: async () => ({ Component: (await import('@/pages/Account/SelfPosts')).default }),
+          },
+          {
             path: 'new-post',
             lazy: async () => ({ Component: (await import('@/pages/Account/NewPost')).default }),
           },

@@ -11,6 +11,7 @@ import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlin
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import PostAddIcon from '@mui/icons-material/PostAdd';
+import BookIcon from '@mui/icons-material/Book';
 
 import { Link } from 'react-router-dom';
 import { logout } from '@/store/reducers/auth';
@@ -94,20 +95,26 @@ function AccountMenu() {
           </div>
         </MenuItem>
         <MenuItem onClick={handleClose}>
-          <Link className='flex items-center gap-2' to='/account/new-post'>
+          <Link className='flex items-center w-full gap-2' to='/account/new-post'>
             <PostAddIcon />
             Bài viết mới
           </Link>
         </MenuItem>
         <MenuItem onClick={handleClose}>
-          <Link className='flex items-center gap-2' to='/account/bookmark/post'>
+          <Link className='flex items-center w-full gap-2' to='/account/post'>
+            <BookIcon />
+            Bài viết của tôi
+          </Link>
+        </MenuItem>
+        <MenuItem onClick={handleClose}>
+          <Link className='flex items-center w-full gap-2' to='/account/bookmark/post'>
             <BookmarkBorderOutlinedIcon />
             Bài viết đã lưu
           </Link>
         </MenuItem>
         <Divider />
         <MenuItem onClick={handleClose}>
-          <Link className='flex items-center gap-2' to='/account/setting'>
+          <Link className='flex items-center w-full gap-2' to='/account/setting'>
             <Settings fontSize='small' />
             Cài đặt
           </Link>
