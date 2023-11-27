@@ -27,10 +27,7 @@ function ListPost({ publish, data, paginate }: Props) {
     onSuccess: () => {
       toast.success('Cập nhật thành công');
       queryClient.invalidateQueries({
-        queryKey: [
-          'accountPosts',
-          { page, publish: publish === PUBLISH.DRAFT ? PUBLISH.PUBLISHED : PUBLISH.DRAFT, limit: LIMIT },
-        ],
+        queryKey: ['accountPosts', { page, publish: publish, limit: LIMIT }],
       });
     },
   });
