@@ -40,6 +40,7 @@ function NewPost() {
       toast.success('Tạo bài viết thành công!');
       reset();
       setHtml('');
+      setIsShowSeries(false);
     } catch (error) {
       setIsLoading(false);
     }

@@ -11,7 +11,7 @@ export const schema = yup
     tag: yup.array().of(yup.string()).required('Tag là bắt buộc'),
     postType: yup.string().required('Loại bài viết là bắt buộc'),
     series: yup.string().when('postType', {
-      is: POST_TYPE.POST_SERIES,
+      is: (value: string | number) => [`${POST_TYPE.POST_SERIES}`, POST_TYPE.POST_SERIES].includes(value),
       then: (schema) => schema.required('Series là bắt buộc'),
     }),
     description: yup.string().required('Mô tả là bắt buộc'),
